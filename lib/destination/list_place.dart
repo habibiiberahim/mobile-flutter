@@ -1,40 +1,35 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constant.dart';
-import 'package:flutter_app/destination/list_place.dart';
-import 'package:flutter_app/home/home_appbar.dart';
+import 'package:flutter_app/destination/detail_place.dart';
+import 'package:flutter_app/model/Place.dart';
 import 'package:flutter_app/model/Destination.dart';
 import 'package:flutter_app/service/Api.dart';
+import '../constant.dart';
 
-class DestinationPage extends StatefulWidget {
-  @override
-  _DestinationPageState createState() => _DestinationPageState();
-}
+class ListPlace extends StatelessWidget {
+  final Destination destination;
+  ListPlace({Key key, this.destination}) : super(key: key);
 
-class _DestinationPageState extends State<DestinationPage> {
-  static Api apiService;
-  static List<Destination> list;
-  @override
-  void initState() {
-    super.initState();
-    apiService = Api();
-  }
+  static Api apiService = Api();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Container(
         child: Scaffold(
-      appBar: TrainAppBar("Destinasi"),
+      appBar: AppBar(
+        title: Text(destination.categoryDestination.toString()),
+        centerTitle: true,
+      ),
       body: FutureBuilder(
-        future: apiService.getDestinations(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Destination>> snapshot) {
+        future: apiService.getPlaces(destination.id.toString()),
+        builder: (BuildContext context, AsyncSnapshot<List<Place>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<Destination> data = snapshot.data;
+            List<Place> data = snapshot.data;
             return createList(data);
           } else {
             return Center(
@@ -46,7 +41,21 @@ class _DestinationPageState extends State<DestinationPage> {
     ));
   }
 
-  Widget makeCard(Destination item) {
+  Widget createList(List<Place> data) {
+    return Container(
+        margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            Place item = data[index];
+            return makeCard(context, item);
+          },
+        ));
+  }
+
+  Widget makeCard(BuildContext context, item) {
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -65,13 +74,13 @@ class _DestinationPageState extends State<DestinationPage> {
                   border: new Border(
                       right: new BorderSide(width: 1.0, color: Colors.white))),
               child: Icon(
-                Icons.place,
+                Icons.map,
                 color: Colors.white,
                 size: 30,
               ),
             ),
             title: Text(
-              item.categoryDestination,
+              item.placeName,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -81,25 +90,11 @@ class _DestinationPageState extends State<DestinationPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListPlace(destination: item)));
+                      builder: (context) => DetailPlace()));
             },
             trailing: Icon(Icons.keyboard_arrow_right,
                 color: Colors.white, size: 30.0)),
       ),
     );
-  }
-
-  Widget createList(List<Destination> data) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
-        child: ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: data.length,
-      itemBuilder: (BuildContext context, int index) {
-        Destination item = data[index];
-        return makeCard(item);
-      },
-    ));
   }
 }

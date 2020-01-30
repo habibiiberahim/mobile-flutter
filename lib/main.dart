@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constant.dart';
 import 'package:flutter_app/launcher/launcher_view.dart';
 
-void main()=> runApp(new MyApp());
+void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _LauncherPageState createState() => _LauncherPageState();
+}
 
-  Widget build(BuildContext context){
-    return new MaterialApp(
+class _LauncherPageState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Stasiun Malang Kota',
       theme: new ThemeData(
-        fontFamily:  'cyn' ,
+        fontFamily: 'cyn',
         primaryColor: TrainPallete.blue,
         accentColor: TrainPallete.blue,
-
       ),
-
-      home: new LauncherPage(),
+      home: LauncherPage()
     );
   }
 }
-

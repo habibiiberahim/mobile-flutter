@@ -15,23 +15,25 @@ class LandingPage extends StatefulWidget{
 class _LandingPageState extends State<LandingPage>{
     int _bottomNavCurrentIndex = 0 ;
     List<Widget> _container = [
-        new HomePage(),
-        new TransportationPage(),
-        new DestinationPage(),
-        new InformationPage(),
+         HomePage(),
+         TransportationPage(),
+         DestinationPage(),
+         InformationPage(),
 
     ];
 
     @override
     Widget build(BuildContext context){
-        return new Scaffold(
+        
+
+        return  Scaffold(
             body: _container [ _bottomNavCurrentIndex],
             bottomNavigationBar: _buildBottomNavigation(),
         );
     }
 
     Widget _buildBottomNavigation(){
-    return new BottomNavigationBar(
+    return  BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: (index){
             setState(() {
@@ -43,58 +45,58 @@ class _LandingPageState extends State<LandingPage>{
         
         items: [
             BottomNavigationBarItem(
-                activeIcon: new Icon(
+                activeIcon: Icon(
                     Icons.home,
                     color: TrainPallete.blue    ,
 
                 ),
-                icon: new Icon (
+                icon:  Icon (
                     Icons.home,
                     color: Colors.grey,
                 ),
-                title: new Text(
+                title:  Text(
                     'Beranda'
                 )
             ),
 
             BottomNavigationBarItem(
-                activeIcon: new Icon(
+                activeIcon:  Icon(
                     Icons.airport_shuttle,
                     color: TrainPallete.blue,
                 ),
-                icon: new Icon (
+                icon:  Icon (
                     Icons.airport_shuttle,
                     color: Colors.grey,
                 ),
-                title: new Text(
+                title:  Text(
                     'Transportasi'
                 )
             ),
 
             BottomNavigationBarItem(
-                activeIcon: new Icon(
+                activeIcon:  Icon(
                     Icons.place,
                     color: TrainPallete.blue,
                 ),
-                icon: new Icon (
+                icon:  Icon (
                     Icons.place,
                     color: Colors.grey,
                 ),
-                title: new Text(
+                title:  Text(
                     'Destinasi'
                 )
             ),
 
             BottomNavigationBarItem(
-                activeIcon: new Icon(
+                activeIcon:  Icon(
                     Icons.message,
                     color: TrainPallete.blue,
                 ),
-                icon: new Icon (
+                icon:  Icon (
                     Icons.message,
                     color: Colors.grey,
                 ),
-                title: new Text(
+                title:  Text(
                     'Informasi'
                 )
             ),
