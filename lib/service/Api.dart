@@ -6,7 +6,7 @@ import 'package:flutter_app/model/Taxi.dart';
 import 'package:http/http.dart' show Client;
 
 class Api {
-  final String baseUrl = "http://192.168.1.6:8000/api/";
+  final String baseUrl = "http://station.maucobain.com/api/";
   Client client = Client();
 
   Future<List<Trayek>> getTrayeks() async {
@@ -39,6 +39,7 @@ class Api {
   Future<List<Place>> getPlaces(String key) async {
     final response = await client.get(baseUrl + "place/" + key);
     if (response.statusCode == 200) {
+
       return Place().placesFromJson(response.body);
     } else {
       return null;

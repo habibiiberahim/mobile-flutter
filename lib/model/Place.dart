@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class Place {
   int id;
-  int categoryDestination;
+  String categoryDestination;
   String placeName;
 
   Place({this.id, this.categoryDestination, this.placeName});

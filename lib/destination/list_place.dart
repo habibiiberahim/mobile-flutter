@@ -7,9 +7,8 @@ import 'package:flutter_app/service/Api.dart';
 import '../constant.dart';
 
 class ListPlace extends StatelessWidget {
-  final Destination destination;
+   Destination destination;
   ListPlace({Key key, this.destination}) : super(key: key);
-
   static Api apiService = Api();
 
   @override
