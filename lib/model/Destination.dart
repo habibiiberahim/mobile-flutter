@@ -11,7 +11,7 @@ class Destination {
   factory Destination.fromJson(Map<String, dynamic> map) {
     return Destination(
       id: map['id'],
-      categoryDestination: map['category_destination'],
+      categoryDestination: map['nama_kategori'],
     
      );
   }
@@ -19,7 +19,7 @@ class Destination {
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "category_destination": categoryDestination,    
+      "nama_kategori": categoryDestination,    
     };
   }
 

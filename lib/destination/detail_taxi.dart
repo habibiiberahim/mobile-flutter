@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/Trayek.dart';
+import 'package:flutter_app/model/Taxi.dart';
 import 'package:photo_view/photo_view.dart';
 
-class DetailPage extends StatelessWidget {
-  final Trayek trayek;
-  DetailPage({Key key, this.trayek}) : super(key: key);
+class DetailPageTaxi extends StatelessWidget {
+  final Taxi taxi;
+  DetailPageTaxi({Key key, this.taxi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(trayek.trayekName),
+            title: Text(taxi.taxiName),
             centerTitle: true,
           ),
           body: Column(
@@ -21,7 +21,7 @@ class DetailPage extends StatelessWidget {
                   child: Card(
                     elevation: 0.8,
                     child: PhotoView(imageProvider: NetworkImage( 
-                          'http://192.168.1.17:8000/images/trayek/'+trayek.trayekSlug)),
+                         '')),
                   )),
               Flexible(
                   flex: 2,
@@ -32,7 +32,7 @@ class DetailPage extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.all(15),
-                            child: Text(trayek.trayekDesc),
+                            child: Text(taxi.taxiDesc),
                           ),
                         ],
                       ))),

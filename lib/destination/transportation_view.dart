@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/destination/detail_taxi.dart';
 import 'package:flutter_app/destination/detail_trayek.dart';
 import 'package:flutter_app/home/home_appbar.dart';
 import 'package:flutter_app/constant.dart';
@@ -113,7 +114,7 @@ class _TransportationPageState extends State<TransportationPage> {
     return Flexible(
       flex: 3,
       child: FutureBuilder(
-        //get list taksi
+        // get list taksi
         future: apiService.getTaxis(),
         builder: (BuildContext context, AsyncSnapshot<List<Taxi>> snapshot) {
           if (snapshot.hasError) {
@@ -359,7 +360,7 @@ class _TransportationPageState extends State<TransportationPage> {
         ),
       );
 
-      static Widget makeCardTaxi(BuildContext context, Taxi item) => Card(
+  static Widget makeCardTaxi(BuildContext context, Taxi item) => Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(9.0))),
         elevation: 8.0,
@@ -406,10 +407,10 @@ class _TransportationPageState extends State<TransportationPage> {
                 ],
               ),
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => DetailPage(taxi: item)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailPageTaxi(taxi: item)));
               },
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 30.0)),

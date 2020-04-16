@@ -6,21 +6,26 @@ import 'package:flutter_app/model/Destination.dart';
 import 'package:flutter_app/service/Api.dart';
 import '../constant.dart';
 
-class ListPlace extends StatelessWidget {
-   Destination destination;
+class ListPlace extends StatefulWidget {
+  Destination destination;
   ListPlace({Key key, this.destination}) : super(key: key);
   static Api apiService = Api();
 
+  @override
+  _ListPlaceState createState() => _ListPlaceState();
+}
+
+class _ListPlaceState extends State<ListPlace> {
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
       appBar: AppBar(
-        title: Text(destination.categoryDestination.toString()),
+        title: Text(widget.destination.categoryDestination.toString()),
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: apiService.getPlaces(destination.id.toString()),
+        future: ListPlace.apiService.getPlaces(widget.destination.id.toString()),
         builder: (BuildContext context, AsyncSnapshot<List<Place>> snapshot) {
           if (snapshot.hasError) {
             return Center(
