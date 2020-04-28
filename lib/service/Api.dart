@@ -7,9 +7,8 @@ import 'package:flutter_app/model/Trayek.dart';
 import 'package:flutter_app/model/Taxi.dart';
 import 'package:http/http.dart' show Client;
 
-
 class Api {
-  static String baseUrl = "http://192.168.1.17:8000/api/";
+  static String baseUrl = "http://192.168.43.13:8000/api/";
   Client client = Client();
 
   Future<List<Trayek>> getTrayeks() async {
@@ -42,10 +41,11 @@ class Api {
   }
 
   Future<List<Place>> getPlaces(String key) async {
-    final response = await client.get(baseUrl + "subkategori/" + key);
+    final response = await client.get(baseUrl + "kategori/" + key);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var rest = jsonEncode(data['result']);
+        
       return Place().placesFromJson(rest);
     } else {
       return null;

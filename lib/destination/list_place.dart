@@ -94,7 +94,7 @@ class _ListPlaceState extends State<ListPlace> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DetailPlace()));
+                      builder: (context) => DetailPlace(place: item,)));
             },
             trailing: Icon(Icons.keyboard_arrow_right,
                 color: Colors.white, size: 30.0)),
