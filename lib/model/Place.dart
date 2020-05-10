@@ -5,8 +5,18 @@ class Place {
   String long;
   String lat;
   String placeName;
+  String deskripsi;
+  String gambar;
+  String noTelp;
 
-  Place({this.id, this.placeName, this.lat, this.long});
+  Place(
+      {this.id,
+      this.placeName,
+      this.lat,
+      this.long,
+      this.deskripsi,
+      this.gambar,
+      this.noTelp});
 
   factory Place.fromJson(Map<String, dynamic> map) {
     return Place(
@@ -14,6 +24,9 @@ class Place {
       lat: map['lat'],
       long: map['long'],
       placeName: map['nama_subkategori'],
+      deskripsi: map['deskripsi'],
+      gambar: map['gambar'],
+      noTelp: map['no_telp'],
     );
   }
 
@@ -23,6 +36,9 @@ class Place {
       "lat": lat,
       "long": long,
       "nama_subkategori": placeName,
+      "deskripsi": deskripsi,
+      "gambar": gambar,
+      "no_telp": noTelp
     };
   }
 

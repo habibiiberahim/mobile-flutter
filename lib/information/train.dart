@@ -4,12 +4,12 @@ import 'package:flutter_app/model/Kereta.dart';
 import 'package:flutter_app/service/Api.dart';
 import '../constant.dart';
 
-class InformationPage extends StatefulWidget {
+class InformationTrainPage extends StatefulWidget {
   @override
   _InformationPageState createState() => new _InformationPageState();
 }
 
-class _InformationPageState extends State<InformationPage> {
+class _InformationPageState extends State<InformationTrainPage> {
   static Api apiService;
   static List<Kereta> list;
 
@@ -22,7 +22,7 @@ class _InformationPageState extends State<InformationPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: TrainAppBar("Beranda"),
+      appBar: TrainAppBar("Informasi Kereta"),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 5),
         child: FutureBuilder(

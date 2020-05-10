@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_app/model/Contact.dart';
 import 'package:flutter_app/model/Destination.dart';
 import 'package:flutter_app/model/Kereta.dart';
+import 'package:flutter_app/model/News.dart';
 import 'package:flutter_app/model/Place.dart';
 import 'package:flutter_app/model/Trayek.dart';
 import 'package:flutter_app/model/Taxi.dart';
@@ -14,7 +16,9 @@ class Api {
   Future<List<Trayek>> getTrayeks() async {
     final response = await client.get(baseUrl + "trayek");
     if (response.statusCode == 200) {
-      return Trayek().trayeksFromJson(response.body);
+      var data = jsonDecode(response.body);
+      var rest = jsonEncode(data['result']);
+      return Trayek().trayeksFromJson(rest);
     } else {
       return null;
     }
@@ -23,7 +27,9 @@ class Api {
   Future<List<Taxi>> getTaxis() async {
     final response = await client.get(baseUrl + "taxi");
     if (response.statusCode == 200) {
-      return Taxi().taxisFromJson(response.body);
+      var data = jsonDecode(response.body);
+      var rest = jsonEncode(data['result']);
+      return Taxi().taxisFromJson(rest);
     } else {
       return null;
     }
@@ -41,12 +47,50 @@ class Api {
   }
 
   Future<List<Place>> getPlaces(String key) async {
-    final response = await client.get(baseUrl + "kategori/" + key);
+    final response = await client.get(baseUrl + "subkategori/" + key);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var rest = jsonEncode(data['result']);
-        
+
       return Place().placesFromJson(rest);
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<News>> getNews() async {
+    final response = await client.get(baseUrl + "berita");
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      var rest = jsonEncode(data['result']);
+
+      return News().newsFromJson(rest);
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<Contact>> getContactPelanggan() async {
+    final response = await client.get(baseUrl + "kontak/1");
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      data = data['result'];
+      var rest = jsonEncode(data['pelanggan']);
+
+      return Contact().contactsFromJson(rest);
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<Contact>> getContactDarurat() async {
+    final response = await client.get(baseUrl + "kontak/1");
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      data = data['result'];
+      var rest = jsonEncode(data['darurat']);
+
+      return Contact().contactsFromJson(rest);
     } else {
       return null;
     }

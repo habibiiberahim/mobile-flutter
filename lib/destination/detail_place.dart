@@ -1,5 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_app/destination/map.dart';
 import 'package:flutter_app/model/Place.dart';
 
 class DetailPlace extends StatelessWidget {
@@ -8,18 +9,33 @@ class DetailPlace extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(),
-            body: Container(
-              height: 400,
-              width: 400,
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(1),
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(double.parse(place.lat), double.parse(place.long)),
-                  zoom: 18.0,
-                ),
-              ),
-            )));
+      appBar: AppBar(title: Text(place.placeName)),
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.map), onPressed: (){
+            Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GoogleMapPage()));
+          }),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      body: Container(
+        child: CarouselSlider(
+          items: [1, 2, 3, 4, 5].map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(color: Colors.white60),
+                    child: Text(
+                      ' $i',
+                      style: TextStyle(fontSize: 16.0),
+                    ));
+              },
+            );
+          }).toList(),
+          options: CarouselOptions(height: 350.0)),
+      )
+    ));
   }
 }

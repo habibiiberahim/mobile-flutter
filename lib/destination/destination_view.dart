@@ -13,6 +13,7 @@ class DestinationPage extends StatefulWidget {
 class _DestinationPageState extends State<DestinationPage> {
   static Api apiService;
   static List<Destination> list;
+
   @override
   void initState() {
     super.initState();
@@ -91,15 +92,15 @@ class _DestinationPageState extends State<DestinationPage> {
 
   Widget createList(List<Destination> data) {
     return Container(
-      margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
+        margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
         child: ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: data.length,
-      itemBuilder: (BuildContext context, int index) {
-        Destination item = data[index];
-        return makeCard(item);
-      },
-    ));
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            Destination item = data[index];
+            return makeCard(item);
+          },
+        ));
   }
 }

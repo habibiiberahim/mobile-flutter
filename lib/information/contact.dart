@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/home/feedback.dart';
-import 'package:flutter_app/home/home_appbar.dart';
-import 'package:flutter_app/home/news_detail.dart';
-import 'package:flutter_app/model/News.dart';
+import 'package:flutter_app/model/Contact.dart';
 import 'package:flutter_app/service/Api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constant.dart';
 
-class HomePage extends StatefulWidget {
+class ListContact extends StatefulWidget {
+  final String jenisKontak;
+  static Contact contact;
+  static Api apiService = Api();
+
+  ListContact({Key key, this.jenisKontak});
+
   @override
-  _HomePageState createState() => new _HomePageState();
+  _Contacts createState() => _Contacts();
 }
 
-class _HomePageState extends State<HomePage> {
-  static Api apiService;
-  static List<News> list;
-
+class _Contacts extends State<ListContact> {
   @override
-  void initState() {
-    super.initState();
-    apiService = Api();
-  }
-
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: TrainAppBar("Berita Terbaru"),
+      appBar: AppBar(
+        title: Text('Kontak Darurat'),
+      ),
       body: FutureBuilder(
-          future: apiService.getNews(),
-          builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
+          future: jenis(widget.jenisKontak),
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
             if (snapshot.hasError) {
               return Center(
                 child: Text(
                     "Something wrong with message: ${snapshot.error.toString()}"),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              List<News> data = snapshot.data;
+              List<Contact> data = snapshot.data;
               return createList(data);
             } else {
               return Center(
@@ -43,16 +42,10 @@ class _HomePageState extends State<HomePage> {
               );
             }
           }),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.feedback),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FeedbackPage()));
-          }),
     ));
   }
 
-  Widget createList(List<News> data) {
+  Widget createList(List<Contact> data) {
     return Container(
         margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
         child: ListView.builder(
@@ -60,13 +53,13 @@ class _HomePageState extends State<HomePage> {
           shrinkWrap: true,
           itemCount: data.length,
           itemBuilder: (BuildContext context, int index) {
-            News item = data[index];
+            Contact item = data[index];
             return makeCard(item);
           },
         ));
   }
 
-  Widget makeCard(News item) {
+  Widget makeCard(Contact item) {
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -85,24 +78,34 @@ class _HomePageState extends State<HomePage> {
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white))),
             child: Icon(
-              Icons.library_books,
+              Icons.contacts,
               color: Colors.white,
               size: 30,
             ),
           ),
           title: Text(
-            item.judul,
+            item.nama,
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
           ),
+          subtitle: Text(
+            item.nomor,
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+          ),
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => DetailPageNews(news: item)));
+            launch('tel: ' + item.nomor);
           },
         ),
       ),
     );
+  }
+
+  jenis(String key) {
+    if (key == 'darurat') {
+      return ListContact.apiService.getContactDarurat();
+    } else {
+      return ListContact.apiService.getContactPelanggan();
+    }
   }
 }

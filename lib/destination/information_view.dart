@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/home_appbar.dart';
+import 'package:flutter_app/information/contact.dart';
+import 'package:flutter_app/information/evacuation_way.dart';
+import 'package:flutter_app/information/map_station.dart';
+import 'package:flutter_app/information/procedure.dart';
+import 'package:flutter_app/information/train.dart';
 
 import '../constant.dart';
 
@@ -58,7 +63,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapStation()));
+                          },
                         ),
                       ),
                     )),
@@ -104,7 +114,10 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InformationTrainPage()));},
                         ),
                       ),
                     )),
@@ -150,7 +163,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Evacuation()));
+                          },
                         ),
                       ),
                     )),
@@ -196,7 +214,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Procedure()));
+                          },
                         ),
                       ),
                     )),
@@ -242,7 +265,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListContact(jenisKontak: "darurat")));
+                          },
                         ),
                       ),
                     )),
@@ -288,7 +316,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListContact(jenisKontak: "pelanggan")));
+                          },
                         ),
                       ),
                     )),
