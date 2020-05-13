@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter_app/landing/landingpage_view.dart';
 import 'package:flutter_app/constant.dart';
 
@@ -12,16 +11,6 @@ class _LauncherPageState extends State<LauncherPage> {
   @override
   void initState() {
     super.initState();
-    startLaunching();
-  }
-
-  startLaunching() async {
-    var duration = const Duration(seconds: 1);
-    return new Timer(duration, () {
-      Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) {
-        return new LandingPage();
-      }));
-    });
   }
 
   @override
@@ -39,20 +28,38 @@ class _LauncherPageState extends State<LauncherPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.all(10),
+                  child: Image.asset(
                   "assets/logo.png",
                   height: 150,
                   width: 400,
                   color: Colors.white,
                 ),
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 30,
+                ),
+                RaisedButton(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.white)),
+                  onPressed: (){
+                     Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  LandingPage()));
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: TrainPallete.blueAccent
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Stasiun Kota Malang'),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(text: 'Stasiun Kota Malang'),
-                    ],
                   ),
                 )
               ],

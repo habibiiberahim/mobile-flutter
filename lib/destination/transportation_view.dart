@@ -14,10 +14,8 @@ class TransportationPage extends StatefulWidget {
 }
 
 class _TransportationPageState extends State<TransportationPage> {
-  static List<Map<String, String>> installedApps;
   static Api apiService;
-  static List<Trayek> list;
-  static List<Taxi> taxis;
+
   @override
   void initState() {
     super.initState();
@@ -75,7 +73,15 @@ class _TransportationPageState extends State<TransportationPage> {
                 ),
               ),
               onPressed: () {
-                AppAvailability.launchApp('com.grabtaxi.passenger');
+                Scaffold.of(context).hideCurrentSnackBar();
+                AppAvailability.checkAvailability('com.grabtaxi.passenger')
+                    .then((_) {
+                  AppAvailability.launchApp('com.grabtaxi.passenger');
+                }).catchError((err) {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Aplikasi tidak ditemukan!")));
+                  print(err);
+                });
               },
             ),
           ),
@@ -101,7 +107,14 @@ class _TransportationPageState extends State<TransportationPage> {
                 ),
               ),
               onPressed: () {
-                AppAvailability.launchApp('com.gojek.app');
+                Scaffold.of(context).hideCurrentSnackBar();
+                AppAvailability.checkAvailability('com.gojek.app').then((_) {
+                  AppAvailability.launchApp('com.gojek.app');
+                }).catchError((err) {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Aplikasi tidak ditemukan!")));
+                  print(err);
+                });
               },
             ),
           ),
@@ -417,3 +430,4 @@ class _TransportationPageState extends State<TransportationPage> {
         ),
       );
 }
+

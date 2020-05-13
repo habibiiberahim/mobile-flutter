@@ -11,7 +11,6 @@ class InformationTrainPage extends StatefulWidget {
 
 class _InformationPageState extends State<InformationTrainPage> {
   static Api apiService;
-  static List<Kereta> list;
 
   @override
   void initState() {

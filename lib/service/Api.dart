@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_app/model/Contact.dart';
 import 'package:flutter_app/model/Destination.dart';
+import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/model/Kereta.dart';
 import 'package:flutter_app/model/News.dart';
 import 'package:flutter_app/model/Place.dart';
@@ -102,6 +103,19 @@ class Api {
       var data = jsonDecode(response.body);
       var rest = jsonEncode(data['result']);
       return Kereta().keretasFromJson(rest);
+    } else {
+      return null;
+    }
+  }
+
+  Future<InformatonStation> getInformation() async {
+    final response = await client.get(baseUrl + "stasiuninfo");
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      var temp = data['result'];
+      var rest = jsonEncode(temp[0]);
+
+      return InformatonStation().informationFromJson(rest);
     } else {
       return null;
     }

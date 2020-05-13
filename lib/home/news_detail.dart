@@ -25,14 +25,15 @@ class DetailPageNews extends StatelessWidget {
                           baseUrl+'/images/berita/'+news.gambar)),
                   )),
               Flexible(
-                  flex: 2,
+                  flex: 1,
                   child: Card(
                       color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(15),
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.all(10),
                             child: Text(news.isi),
                           ),
                         ],

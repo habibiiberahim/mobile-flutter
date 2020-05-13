@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static Api apiService;
-  static List<News> list;
 
   @override
   void initState() {
