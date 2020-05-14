@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constant.dart';
 import 'package:flutter_app/launcher/launcher_view.dart';
 
-void main() => runApp(MyApp());
+void main() =>
+    runApp(MyApp());  
+  
 
 class MyApp extends StatefulWidget {
   @override

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/Trayek.dart';
+import 'package:flutter_app/model/News.dart';
 import 'package:photo_view/photo_view.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPageNews extends StatelessWidget {
   static String baseUrl = "http://192.168.43.13:8000";
-  final Trayek trayek;
-  DetailPage({Key key, this.trayek}) : super(key: key);
+  final News news;
+  DetailPageNews({Key key, this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(trayek.trayekName),
+            title: Text(news.judul),
             centerTitle: true,
           ),
           body: Column(
@@ -22,7 +22,7 @@ class DetailPage extends StatelessWidget {
                   child: Card(
                     elevation: 0.8,
                     child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'/images/trayek/'+trayek.trayekSlug)),
+                          baseUrl+'/images/berita/'+news.gambar)),
                   )),
               Flexible(
                   flex: 1,
@@ -34,7 +34,7 @@ class DetailPage extends StatelessWidget {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.all(10),
-                            child: Text(trayek.trayekDesc),
+                            child: Text(news.isi),
                           ),
                         ],
                       ))),

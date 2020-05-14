@@ -2,24 +2,43 @@ import 'dart:convert';
 
 class Place {
   int id;
-  String categoryDestination;
+  String long;
+  String lat;
   String placeName;
+  String deskripsi;
+  String gambar;
+  String noTelp;
 
-  Place({this.id, this.categoryDestination, this.placeName});
+  Place(
+      {this.id,
+      this.placeName,
+      this.lat,
+      this.long,
+      this.deskripsi,
+      this.gambar,
+      this.noTelp});
 
   factory Place.fromJson(Map<String, dynamic> map) {
     return Place(
       id: map['id'],
-      categoryDestination: map['category_destination'],
-      placeName: map['place_name'],
+      lat: map['lat'],
+      long: map['long'],
+      placeName: map['nama_subkategori'],
+      deskripsi: map['deskripsi'],
+      gambar: map['gambar'],
+      noTelp: map['no_telp'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "category_destination": categoryDestination,
-      "place_name": placeName,
+      "lat": lat,
+      "long": long,
+      "nama_subkategori": placeName,
+      "deskripsi": deskripsi,
+      "gambar": gambar,
+      "no_telp": noTelp
     };
   }
 

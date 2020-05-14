@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/destination/detail_taxi.dart';
 import 'package:flutter_app/destination/detail_trayek.dart';
 import 'package:flutter_app/home/home_appbar.dart';
 import 'package:flutter_app/constant.dart';
@@ -13,10 +14,8 @@ class TransportationPage extends StatefulWidget {
 }
 
 class _TransportationPageState extends State<TransportationPage> {
-  static List<Map<String, String>> installedApps;
   static Api apiService;
-  static List<Trayek> list;
-  static List<Taxi> taxis;
+
   @override
   void initState() {
     super.initState();
@@ -74,7 +73,15 @@ class _TransportationPageState extends State<TransportationPage> {
                 ),
               ),
               onPressed: () {
-                AppAvailability.launchApp('com.grabtaxi.passenger');
+                Scaffold.of(context).hideCurrentSnackBar();
+                AppAvailability.checkAvailability('com.grabtaxi.passenger')
+                    .then((_) {
+                  AppAvailability.launchApp('com.grabtaxi.passenger');
+                }).catchError((err) {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Aplikasi tidak ditemukan!")));
+                  print(err);
+                });
               },
             ),
           ),
@@ -100,7 +107,14 @@ class _TransportationPageState extends State<TransportationPage> {
                 ),
               ),
               onPressed: () {
-                AppAvailability.launchApp('com.gojek.app');
+                Scaffold.of(context).hideCurrentSnackBar();
+                AppAvailability.checkAvailability('com.gojek.app').then((_) {
+                  AppAvailability.launchApp('com.gojek.app');
+                }).catchError((err) {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Aplikasi tidak ditemukan!")));
+                  print(err);
+                });
               },
             ),
           ),
@@ -113,7 +127,7 @@ class _TransportationPageState extends State<TransportationPage> {
     return Flexible(
       flex: 3,
       child: FutureBuilder(
-        //get list taksi
+        // get list taksi
         future: apiService.getTaxis(),
         builder: (BuildContext context, AsyncSnapshot<List<Taxi>> snapshot) {
           if (snapshot.hasError) {
@@ -359,7 +373,7 @@ class _TransportationPageState extends State<TransportationPage> {
         ),
       );
 
-      static Widget makeCardTaxi(BuildContext context, Taxi item) => Card(
+  static Widget makeCardTaxi(BuildContext context, Taxi item) => Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(9.0))),
         elevation: 8.0,
@@ -406,13 +420,14 @@ class _TransportationPageState extends State<TransportationPage> {
                 ],
               ),
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => DetailPage(taxi: item)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailPageTaxi(taxi: item)));
               },
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 30.0)),
         ),
       );
 }
+

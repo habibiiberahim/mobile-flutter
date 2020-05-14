@@ -20,7 +20,7 @@ class Trayek {
       trayekName: map['trayek_name'],
       trayekPrice: map['trayek_price'],
       trayekDesc: map['trayek_desc'],
-      trayekSlug: map['trayek_slug'],
+      trayekSlug: map['gambar'],
     );
   }
 
@@ -30,7 +30,7 @@ class Trayek {
       "trayek_name": trayekName,
       "trayek_price": trayekPrice,
       "trayek_desc": trayekDesc,
-      "trayek_slug": trayekSlug
+      "gambar": trayekSlug
     };
   }
 
