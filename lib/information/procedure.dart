@@ -2,10 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Procedure extends StatelessWidget {
-  final String baseUrl = "http://192.168.43.13:8000";
- final apiservice = Api();
+  static String baseUrl = "";
+  final apiservice = Api();
+
+  Procedure(){
+    getData();
+  }
+
+  void getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    baseUrl = prefs.getString('baseURL');
+    print(baseUrl);
+  }
 
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,8 +26,8 @@ class Procedure extends StatelessWidget {
       ),
       body: FutureBuilder(
         future: apiservice.getInformation(),
-        builder: (BuildContext context,
-            AsyncSnapshot<InformatonStation> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<InformatonStation> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -37,7 +48,9 @@ class Procedure extends StatelessWidget {
 
   _showPhoto(InformatonStation data) {
     return Container(
-      child:PhotoView(imageProvider: NetworkImage(baseUrl+'/images/denah/'+data.prosedurEvakuasi)) ,
+      child: PhotoView(
+          imageProvider:
+              NetworkImage(baseUrl + '/images/denah/' + data.prosedurEvakuasi)),
     );
   }
 }

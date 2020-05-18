@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Trayek.dart';
+import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailPage extends StatelessWidget {
-  static String baseUrl = "http://192.168.43.13:8000";
-  final Trayek trayek;
-  DetailPage({Key key, this.trayek}) : super(key: key);
+  static String baseUrl = "http://maucobain.com";
+  static Trayek trayek;
+  static Api api;
+
+  DetailPage(Trayek item) {
+    trayek = item;
+    api = Api();
+    
+  }
+
+   void getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    baseUrl = prefs.getString('baseURL');
+  }
 
   @override
   Widget build(BuildContext context) {

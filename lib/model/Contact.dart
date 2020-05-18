@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Contact {
-  int id;
+  String id;
   String nama;
   String nomor;
   Contact({this.id, this.nama, this.nomor});

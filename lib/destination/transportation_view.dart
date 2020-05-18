@@ -366,7 +366,7 @@ class _TransportationPageState extends State<TransportationPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DetailPage(trayek: item)));
+                        builder: (context) => DetailPage(item)));
               },
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 30.0)),

@@ -9,7 +9,7 @@ class Kereta {
   String kelaska;
   String relasi;
   String progresStasiun;
-  int jenisId;
+  String jenisId;
   String keterangan;
 
   Kereta({

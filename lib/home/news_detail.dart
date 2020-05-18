@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/News.dart';
+import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailPageNews extends StatelessWidget {
-  static String baseUrl = "http://192.168.43.13:8000";
-  final News news;
-  DetailPageNews({Key key, this.news}) : super(key: key);
+  static String baseUrl = "";
+  static News news;
+  static Api api = Api();
+  
+  DetailPageNews(News item){
+    getData();
+    news = item;
+    
+  }
+
+
+  void getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    baseUrl = prefs.getString('baseURL');
+  }
 
   @override
   Widget build(BuildContext context) {
