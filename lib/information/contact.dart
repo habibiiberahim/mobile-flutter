@@ -10,6 +10,7 @@ class ListContact extends StatefulWidget {
   static Contact contact;
   static Api apiService = Api();
 
+
   ListContact({Key key, this.jenisKontak});
 
   @override
@@ -22,7 +23,7 @@ class _Contacts extends State<ListContact> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text('Kontak Darurat'),
+        title: Text(widget.jenisKontak.toUpperCase()),
       ),
       body: FutureBuilder(
           future: jenis(widget.jenisKontak),

@@ -44,7 +44,7 @@ class DetailPlace extends StatelessWidget {
                 ), 
                 Flexible(
                   flex: 2,
-                  child: Text('Deskipsi'))
+                  child: Text(place.gambar))
               ],
             ))));
   }

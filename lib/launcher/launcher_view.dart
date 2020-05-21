@@ -51,13 +51,14 @@ class _LauncherPageState extends State<LauncherPage> {
                       builder: (context) =>  LandingPage()));
                   },
                   child: RichText(
+                   
                     text: TextSpan(
                       style: TextStyle(
                         fontSize: 30,
                         color: TrainPallete.blueAccent
                       ),
                       children: <TextSpan>[
-                        TextSpan(text: 'Stasiun Kota Malang'),
+                        TextSpan(text: 'Stasiun Malang Kota Baru'),
                       ],
                     ),
                   ),

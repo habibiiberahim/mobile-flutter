@@ -16,7 +16,7 @@ class DetailPageNews extends StatelessWidget {
   }
 
 
-  void getData() async {
+  getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     baseUrl = prefs.getString('baseURL');
   }
@@ -36,7 +36,7 @@ class DetailPageNews extends StatelessWidget {
                   child: Card(
                     elevation: 0.8,
                     child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'/images/berita/'+news.gambar)),
+                          baseUrl+'images/berita/'+news.gambar)),
                   )),
               Flexible(
                   flex: 1,

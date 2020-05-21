@@ -1,32 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/Trayek.dart';
-import 'package:flutter_app/service/Api.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/model/Kereta.dart';
 
-class DetailPage extends StatelessWidget {
-  static String baseUrl = "";
-  static Trayek trayek;
-  static Api api =Api();
-
-  DetailPage(Trayek item) {
-    getData();
-    trayek = item;
-    
-    
-  }
-
-   void getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    baseUrl = prefs.getString('baseURL');
-  }
+class DetailTrain extends StatelessWidget {
+  final Kereta kereta;
+  const DetailTrain({Key key, this.kereta}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(trayek.trayekName),
+            title: Text(kereta.namaKereta),
             centerTitle: true,
           ),
           body: Column(
@@ -35,8 +19,7 @@ class DetailPage extends StatelessWidget {
                   flex: 1,
                   child: Card(
                     elevation: 0.8,
-                    child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'images/trayek/'+trayek.trayekSlug)),
+                    child: Text(''),
                   )),
               Flexible(
                   flex: 1,
@@ -48,7 +31,7 @@ class DetailPage extends StatelessWidget {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.all(10),
-                            child: Text(trayek.trayekDesc),
+                            child: Text(kereta.noKa),
                           ),
                         ],
                       ))),

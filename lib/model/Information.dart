@@ -1,45 +1,37 @@
 import 'dart:convert';
 
-class InformatonStation {
-  String denahStasiun;
-  String prosedurEvakuasi;
-  String petaJaringan;
-  String denahEvakuasi;
+class InformationStation {
+  int id;
+  String namaDenah;
+  String gambar;
+  String deskripsi;
 
-  InformatonStation(
-      {this.denahStasiun,
-      this.prosedurEvakuasi,
-      this.petaJaringan,
-      this.denahEvakuasi});
+  InformationStation({this.id, this.namaDenah, this.gambar, this.deskripsi});
 
-  factory InformatonStation.fromJson(Map<String, dynamic> map) {
-    return InformatonStation(
-        denahStasiun: map['denah_stasiun'],
-        prosedurEvakuasi: map['prosedur_evakuasi'],
-        petaJaringan: map['peta_jaringan'],
-        denahEvakuasi: map['denah_evakuasi']);
+  factory InformationStation.fromJson(Map<String, dynamic> map) {
+    return InformationStation(
+        id: map['id'],
+        namaDenah: map['nama_denah'],
+        gambar: map['gambar'],
+        deskripsi: map['deskripsi']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'denah_stasiun': this.denahStasiun,
-      'prosedur_evakuasi': this.prosedurEvakuasi,
-      'peta_jaringan': this.petaJaringan,
-      'denah_evakuasi': this.denahEvakuasi
+      'id': this.id,
+      'nama_denah': this.namaDenah,
+      'gambar': this.gambar,
+      'deskripsi': this.deskripsi
     };
   }
 
-  InformatonStation informationFromJson(String jsonData) {
+  List<InformationStation> informationFromJson(String jsonData) {
     final data = json.decode(jsonData);
-    return InformatonStation.fromJson(data);
+    return List<InformationStation>.from(data.map((item) => InformationStation.fromJson(item)));
   }
 
-  String informationToJson(InformatonStation data) {
+  String informationToJson(InformationStation data) {
     final jsonData = data.toJson();
     return json.encode(jsonData);
-  }
-
-  String getProsedure(){
-    return prosedurEvakuasi;
   }
 }

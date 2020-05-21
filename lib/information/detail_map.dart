@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/Trayek.dart';
+import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPageMap extends StatelessWidget {
   static String baseUrl = "";
-  static Trayek trayek;
-  static Api api =Api();
-
-  DetailPage(Trayek item) {
+  static InformationStation map;
+  static Api api = Api();
+  
+  DetailPageMap(InformationStation informationStation){
     getData();
-    trayek = item;
-    
+    map = informationStation;
     
   }
 
-   void getData() async {
+
+  getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     baseUrl = prefs.getString('baseURL');
   }
@@ -26,7 +26,7 @@ class DetailPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(trayek.trayekName),
+            title: Text(map.namaDenah),
             centerTitle: true,
           ),
           body: Column(
@@ -36,7 +36,7 @@ class DetailPage extends StatelessWidget {
                   child: Card(
                     elevation: 0.8,
                     child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'images/trayek/'+trayek.trayekSlug)),
+                          baseUrl+'images/denah/'+map.gambar)),
                   )),
               Flexible(
                   flex: 1,
@@ -48,7 +48,7 @@ class DetailPage extends StatelessWidget {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.all(10),
-                            child: Text(trayek.trayekDesc),
+                            child: Text(map.deskripsi),
                           ),
                         ],
                       ))),

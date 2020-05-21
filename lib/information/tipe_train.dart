@@ -1,46 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/home_appbar.dart';
-import 'package:flutter_app/information/train_detail.dart';
-import 'package:flutter_app/model/Kereta.dart';
+import 'package:flutter_app/information/train.dart';
 import 'package:flutter_app/model/Tipe.dart';
 import 'package:flutter_app/service/Api.dart';
+
 import '../constant.dart';
 
-class InformationTrainPage extends StatefulWidget {
-  final Tipe tipe;
-  InformationTrainPage({Key key, @required this.tipe}) : super(key: key);
+class TypeTrain extends StatelessWidget {
+  static Api apiService = Api();
+
 
   @override
-  _InformationPageState createState() => new _InformationPageState();
-}
-
-class _InformationPageState extends State<InformationTrainPage> {
-  static Api apiService;
-
-  @override
-  void initState() {
-    super.initState();
-    apiService = Api();
-  }
-
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: TrainAppBar("Informasi Kereta"),
+      appBar: TrainAppBar("Jenis Kereta"),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 5),
         child: FutureBuilder(
-          future: apiService.getKeretas(widget.tipe.id),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Kereta>> snapshot) {
+          future: apiService.getTipes(),
+          builder: (BuildContext context, AsyncSnapshot<List<Tipe>> snapshot) {
             if (snapshot.hasError) {
               return Center(
                 child: Text(
                     "Something wrong with message: ${snapshot.error.toString()}"),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              List<Kereta> data = snapshot.data;
-              return _listKereta(data);
+              List<Tipe> data = snapshot.data;
+              return _list(data);
             } else {
               return Center(
                 child: CircularProgressIndicator(),
@@ -52,20 +39,20 @@ class _InformationPageState extends State<InformationTrainPage> {
     ));
   }
 
-  static Widget _listKereta(List<Kereta> keretas) {
+  static Widget _list(List<Tipe> items) {
     return Container(
         child: ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: keretas.length,
+      itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
-        Kereta item = keretas[index];
+        Tipe item = items[index];
         return makeCardKereta(context, item);
       },
     ));
   }
 
-  static Widget makeCardKereta(BuildContext context, Kereta item) => Card(
+  static Widget makeCardKereta(BuildContext context, Tipe item) => Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(9.0))),
         elevation: 8.0,
@@ -95,33 +82,15 @@ class _InformationPageState extends State<InformationTrainPage> {
                 ),
               ),
               title: Text(
-                item.namaKereta,
+                item.jenisKereta,
                 style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-              subtitle: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.access_time,
-                    color: Colors.white54,
-                    size: 15,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                    child:
-                        Text(item.jam, style: TextStyle(color: Colors.white)),
-                  )
-                ],
+                    TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailTrain(
-                              kereta: item,
-                            )));
+                 Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InformationTrainPage(tipe: item,)));
               },
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 30.0)),

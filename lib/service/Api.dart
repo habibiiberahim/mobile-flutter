@@ -7,6 +7,7 @@ import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/model/Kereta.dart';
 import 'package:flutter_app/model/News.dart';
 import 'package:flutter_app/model/Place.dart';
+import 'package:flutter_app/model/Tipe.dart';
 import 'package:flutter_app/model/Trayek.dart';
 import 'package:flutter_app/model/Taxi.dart';
 import 'package:http/http.dart' show Client;
@@ -110,8 +111,8 @@ class Api {
     }
   }
 
-  Future<List<Kereta>> getKeretas() async {
-    final response = await client.get(baseUrl + "api/keretainfo");
+  Future<List<Kereta>> getKeretas(int jenis) async {
+    final response = await client.get(baseUrl + "api/keretainfo/"+jenis.toString());
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var rest = jsonEncode(data['result']);
@@ -121,29 +122,47 @@ class Api {
     }
   }
 
-  Future<InformatonStation> getInformation() async {
+  Future<List<InformationStation>> getInformation() async {
     final response = await client.get(baseUrl + "api/stasiuninfo");
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var temp = data['result'];
-      var rest = jsonEncode(temp[0]);
+      var rest = jsonEncode(temp);
 
-      return InformatonStation().informationFromJson(rest);
+      return InformationStation().informationFromJson(rest);
     } else {
       return null;
     }
   }
 
-  Future<bool> createProfile(Feedbacks data) async {
+  Future<bool> createFeedback(Feedbacks data) async {
+    
     final response = await client.post(
-      "$baseUrl/api/profile",
+      "$baseUrl/api/feedback",
       headers: {"content-type": "application/json"},
       body: feedbackToJson(data),
     );
-    if (response.statusCode == 201) {
+    var code = jsonDecode(response.body);
+    var temp = code['status'];
+    if (temp == 'OK') {
       return true;
     } else {
       return false;
     }
   }
+
+  Future<List<Tipe>> getTipes() async {
+    final response = await client.get(baseUrl + "api/keretainfo/jenis");
+     print(response);
+    
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      var rest = jsonEncode(data['result']);
+     
+      return Tipe().tipesFromJson(rest);
+    } else {
+      return null;
+    }
+  }
+
 }
