@@ -7,21 +7,10 @@ import 'package:flutter_app/information/detail_map.dart';
 import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/service/Api.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class MapStation extends StatelessWidget {
-  static String baseUrl = "";
+  static String baseUrl = TrainPallete.baseURL;
   final apiService = Api();
 
-  MapStation() {
-    getData();
-  }
-
-  void getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    baseUrl = prefs.getString('baseURL');
-    print(baseUrl);
-  }
 
   Widget build(BuildContext context) {
     return SafeArea(

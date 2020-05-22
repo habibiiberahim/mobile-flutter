@@ -8,6 +8,7 @@ void main() =>
   
 
 class MyApp extends StatefulWidget {
+  
   @override
   _LauncherPageState createState() => _LauncherPageState();
 }
@@ -16,7 +17,7 @@ class _LauncherPageState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       title: 'Stasiun Malang Kota',
       theme: new ThemeData(
         fontFamily: 'cyn',

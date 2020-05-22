@@ -2,10 +2,20 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/destination/map.dart';
 import 'package:flutter_app/model/Place.dart';
+import 'package:flutter_app/service/Api.dart';
+import 'package:photo_view/photo_view.dart';
+import '../constant.dart';
 
 class DetailPlace extends StatelessWidget {
-  final Place place;
-  DetailPlace({Key key, this.place}) : super(key: key);
+  static String baseUrl = TrainPallete.baseURL;
+  static Api api = Api();
+  static Place place;
+
+  DetailPlace(Place item) {
+    place = item;
+  }
+
+
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -22,30 +32,54 @@ class DetailPlace extends StatelessWidget {
             body: Container(
                 child: Column(
               children: <Widget>[
-                Flexible(
-                  flex: 3,
-                  child: CarouselSlider(
-                      items: [1, 2, 3, 4, 5].map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration:
-                                    BoxDecoration(color: Colors.white60),
-                                child: Text(
-                                  ' $i',
-                                  style: TextStyle(fontSize: 16.0),
-                                ));
-                          },
-                        );
-                      }).toList(),
-                      options: CarouselOptions(height: 350.0)),
-                ), 
-                Flexible(
-                  flex: 2,
-                  child: Text(place.gambar))
+                Flexible(flex: 3, child: _buildCarrousel(place.gambar)),
+                Flexible(flex: 1, child: _buildCard(place.deskripsi))
               ],
             ))));
+  }
+
+  _buildCard(String item) {
+    return Builder(
+      builder: (BuildContext context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 1.0),
+         
+          decoration: BoxDecoration(color: Colors.white60),
+          child: Card(
+            elevation: 10,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(item),
+            )
+          ),
+        );
+      },
+    );
+  }
+
+  _buildCarrousel(String item) {
+    var images = place.getImages(item);
+
+    return CarouselSlider(
+        items: images.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(color: Colors.white60),
+                child: Card(
+                  elevation: 10,
+                  child: PhotoView(
+                      imageProvider:
+                          NetworkImage(baseUrl + 'images/destinasi/$i')),
+                ),
+              );
+            },
+          );
+        }).toList(),
+        options: CarouselOptions(height: 350.0));
   }
 }

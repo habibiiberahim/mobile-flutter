@@ -26,7 +26,7 @@ class _InformationPageState extends State<InformationTrainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: TrainAppBar("Informasi Kereta"),
+      appBar: TrainAppBar(widget.tipe.jenisKereta.toUpperCase()),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 5),
         child: FutureBuilder(
@@ -120,7 +120,7 @@ class _InformationPageState extends State<InformationTrainPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => DetailTrain(
-                              kereta: item,
+                               item,
                             )));
               },
               trailing: Icon(Icons.keyboard_arrow_right,

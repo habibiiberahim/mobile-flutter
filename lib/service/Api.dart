@@ -11,22 +11,12 @@ import 'package:flutter_app/model/Tipe.dart';
 import 'package:flutter_app/model/Trayek.dart';
 import 'package:flutter_app/model/Taxi.dart';
 import 'package:http/http.dart' show Client;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/constant.dart';
+
 
 class Api {
-  static String baseUrl = "http://maucobain.com/";
+  static String baseUrl = TrainPallete.baseURL;
   Client client = Client();
-
-  Api() {
-    setPref();
-  }
-
-  setPref() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('baseURL', baseUrl);
-  }
-
-  
 
   Future<List<Trayek>> getTrayeks() async {
     final response = await client.get(baseUrl + "api/trayek");

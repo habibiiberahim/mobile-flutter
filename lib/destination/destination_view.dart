@@ -12,8 +12,7 @@ class DestinationPage extends StatefulWidget {
 
 class _DestinationPageState extends State<DestinationPage> {
   static Api apiService;
-
-
+  
   @override
   void initState() {
     super.initState();

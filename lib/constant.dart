@@ -8,6 +8,7 @@ class TrainPallete{
   static Color menuCar      = Color(0xff14639e);
   static Color blue         = Color(0xff2d98da);
   static Color blueAccent   = Color(0xff2d98da);
+  static String baseURL = "http://maucobain.com/";
 
 
 }

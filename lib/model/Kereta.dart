@@ -9,6 +9,7 @@ class Kereta {
   String kelaska;
   String relasi;
   String progresStasiun;
+  String gambarJalur;
   String jenisId;
   String keterangan;
 
@@ -23,6 +24,7 @@ class Kereta {
     this.progresStasiun,
     this.jenisId,
     this.keterangan,
+    this.gambarJalur
   });
 
   factory Kereta.fromJson(Map<String, dynamic> map) {
@@ -36,7 +38,9 @@ class Kereta {
         relasi: map['relasi'],
         progresStasiun: map['progres_stasiun'],
         jenisId: map['jenis_id'],
+        gambarJalur:map['gambar_jalur'],
         keterangan: map['keterangan']);
+        
   }
 
 
@@ -52,6 +56,7 @@ class Kereta {
     'progres_stasiun' : this.progresStasiun,
     'jenis_id' : this.jenisId,
     'keterangan' : this.keterangan,
+    'gambar_jalur':this.gambarJalur
     };
   }
 

@@ -2,23 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Trayek.dart';
 import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constant.dart';
 
 class DetailPage extends StatelessWidget {
-  static String baseUrl = "";
+  static String baseUrl = TrainPallete.baseURL;
   static Trayek trayek;
-  static Api api =Api();
+  static Api api = Api();
 
   DetailPage(Trayek item) {
-    getData();
     trayek = item;
-    
-    
-  }
-
-   void getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    baseUrl = prefs.getString('baseURL');
   }
 
   @override
@@ -35,8 +28,9 @@ class DetailPage extends StatelessWidget {
                   flex: 1,
                   child: Card(
                     elevation: 0.8,
-                    child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'images/trayek/'+trayek.trayekSlug)),
+                    child: PhotoView(
+                        imageProvider: NetworkImage(
+                            baseUrl + 'images/trayek/' + trayek.trayekSlug)),
                   )),
               Flexible(
                   flex: 1,

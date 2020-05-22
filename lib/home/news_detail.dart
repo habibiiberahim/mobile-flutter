@@ -2,23 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/News.dart';
 import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../constant.dart';
 
 class DetailPageNews extends StatelessWidget {
-  static String baseUrl = "";
+  static String baseUrl = TrainPallete.baseURL;
   static News news;
   static Api api = Api();
-  
-  DetailPageNews(News item){
-    getData();
+
+  DetailPageNews(News item) {
     news = item;
-    
-  }
-
-
-  getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    baseUrl = prefs.getString('baseURL');
   }
 
   @override
@@ -35,8 +27,9 @@ class DetailPageNews extends StatelessWidget {
                   flex: 1,
                   child: Card(
                     elevation: 0.8,
-                    child: PhotoView(imageProvider: NetworkImage( 
-                          baseUrl+'images/berita/'+news.gambar)),
+                    child: PhotoView(
+                        imageProvider: NetworkImage(
+                            baseUrl + 'images/berita/' + news.gambar)),
                   )),
               Flexible(
                   flex: 1,
