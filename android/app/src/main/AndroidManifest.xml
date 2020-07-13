@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_app"
+        android:label="Passenger Information"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -34,4 +34,5 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9NFMGs5sVynE3U1KznvG_IvJfD343Zds" />
     </application>
+    
 </manifest>

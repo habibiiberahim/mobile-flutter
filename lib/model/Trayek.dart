@@ -43,4 +43,9 @@ class Trayek {
     final jsonData = data.toJson();
     return json.encode(jsonData);
   }
+
+  List<String> getImages(String jsonData) {
+    final data = json.decode(jsonData);
+    return List<String>.from(data.map((item) => (item)));
+  }
 }

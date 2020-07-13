@@ -17,7 +17,7 @@ class _LauncherPageState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'Stasiun Malang Kota',
       theme: new ThemeData(
         fontFamily: 'cyn',

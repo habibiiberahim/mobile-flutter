@@ -5,7 +5,7 @@ class Kereta {
   String namaKereta;
   String noKa;
   String jam;
-  int jalurId;
+  String jalurId;
   String kelaska;
   String relasi;
   String progresStasiun;
@@ -38,7 +38,7 @@ class Kereta {
         relasi: map['relasi'],
         progresStasiun: map['progres_stasiun'],
         jenisId: map['jenis_id'],
-        gambarJalur:map['gambar_jalur'],
+        gambarJalur:map['jalur'],
         keterangan: map['keterangan']);
         
   }
@@ -56,7 +56,7 @@ class Kereta {
     'progres_stasiun' : this.progresStasiun,
     'jenis_id' : this.jenisId,
     'keterangan' : this.keterangan,
-    'gambar_jalur':this.gambarJalur
+    'jalur':this.gambarJalur
     };
   }
 

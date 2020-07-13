@@ -29,14 +29,31 @@ class _LauncherPageState extends State<LauncherPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
+                  
+                  margin: EdgeInsets.symmetric(vertical: 0),
+                  padding: EdgeInsets.all(10),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      
+                      style: TextStyle(
+                          fontSize: 30, color: Colors.white),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Passenger Information System'),
+                        
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
                   padding: EdgeInsets.all(10),
                   child: Image.asset(
-                  "assets/logo.png",
-                  height: 150,
-                  width: 400,
-                  color: Colors.white,
-                ),
+                    "assets/logo.png",
+                    height: 150,
+                    width: 400,
+                    color: Colors.white,
+                  ),
                 ),
                 RaisedButton(
                   padding: EdgeInsets.all(10),
@@ -44,25 +61,36 @@ class _LauncherPageState extends State<LauncherPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.white)),
-                  onPressed: (){
-                     Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>  LandingPage()));
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LandingPage()));
                   },
                   child: RichText(
-                   
                     text: TextSpan(
                       style: TextStyle(
-                        fontSize: 30,
-                        color: TrainPallete.blueAccent
-                      ),
+                          fontSize: 30, color: TrainPallete.blueAccent),
                       children: <TextSpan>[
                         TextSpan(text: 'Stasiun Malang Kota Baru'),
                       ],
                     ),
                   ),
-                )
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.0),
+                      ),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                          fontSize: 30, color: Colors.white),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Coming Soon'),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             )));
   }

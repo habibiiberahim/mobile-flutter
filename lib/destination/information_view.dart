@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/home_appbar.dart';
+import 'package:flutter_app/information/about.dart';
 import 'package:flutter_app/information/contact.dart';
 import 'package:flutter_app/information/map_station.dart';
 import 'package:flutter_app/information/tipe_train.dart';
@@ -101,7 +102,7 @@ class _InformationPageState extends State<InformationPage> {
                                     right: new BorderSide(
                                         width: 1.0, color: Colors.white))),
                             child: Icon(
-                              Icons.info,
+                              Icons.train,
                               color: Colors.white,
                               size: 40,
                             ),
@@ -112,10 +113,12 @@ class _InformationPageState extends State<InformationPage> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onTap: () {Navigator.push(
+                          onTap: () {
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TypeTrain()));},
+                                    builder: (context) => TypeTrain()));
+                          },
                         ),
                       ),
                     )),
@@ -165,7 +168,8 @@ class _InformationPageState extends State<InformationPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ListContact(jenisKontak: "darurat")));
+                                    builder: (context) =>
+                                        ListContact(jenisKontak: "darurat")));
                           },
                         ),
                       ),
@@ -216,7 +220,60 @@ class _InformationPageState extends State<InformationPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ListContact(jenisKontak: "pelanggan")));
+                                    builder: (context) =>
+                                        ListContact(jenisKontak: "pelanggan")));
+                          },
+                        ),
+                      ),
+                    )),
+                Flexible(
+                    flex: 1,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                      elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 6.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                              colors: [
+                                TrainPallete.blue,
+                                TrainPallete.blueAccent
+                              ],
+                            ),
+                            // color: TrainPallete.blue,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          leading: Container(
+                            padding: EdgeInsets.only(right: 12.0),
+                            decoration: new BoxDecoration(
+                                border: new Border(
+                                    right: new BorderSide(
+                                        width: 1.0, color: Colors.white))),
+                            child: Icon(
+                              Icons.info,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                          title: Text(
+                            "About",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        AboutPage()));
                           },
                         ),
                       ),

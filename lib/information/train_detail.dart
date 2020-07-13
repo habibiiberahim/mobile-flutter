@@ -71,29 +71,45 @@ class DetailTrain extends StatelessWidget {
                       subtitle: Text(kereta.relasi),
                     )),
                 Flexible(
-                    flex: 3,
+                    flex: 1,
                     child: ListTile(
-                      title: Text("Jalur"),
-                      subtitle: Container(
-                        color: Colors.black26,
-                        height: 120,
-                        width: 20,
-                        child: PhotoView(
-                            imageProvider: NetworkImage(
-                                baseUrl + 'images/keretainfo/' + kereta.gambarJalur)),
+                      title: Text("Nomor jalur"),
+                      subtitle: Text(kereta.jalurId),
+                    )),
+                Flexible(
+                    flex: 3,
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: ListTile(
+                        title: Text("Jalur"),
+                        subtitle: Container(
+                          color: Colors.black26,
+                          height: 250,
+                          width: 40,
+                          child: PhotoView(
+                              imageProvider: NetworkImage(baseUrl +
+                                  'images/keretainfo/' +
+                                  kereta.gambarJalur)),
+                        ),
                       ),
                     )),
                 Flexible(
                     flex: 3,
-                    child: ListTile(
-                      title: Text("Progres Stasiun"),
-                      subtitle: Container(
-                        color: Colors.black26,
-                        height: 120,
-                        width: 20,
-                        child: PhotoView(
-                            imageProvider: NetworkImage(
-                                baseUrl + 'images/keretainfo/' + kereta.progresStasiun)),
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: ListTile(
+                        title: Text("Stasiun Pemberhentian"),
+                        subtitle: Container(
+                          color: Colors.black26,
+                          height: 180,
+                          width: 20,
+                          child: PhotoView(
+                              imageProvider: NetworkImage(baseUrl +
+                                  'images/keretainfo/' +
+                                  kereta.progresStasiun)),
+                        ),
                       ),
                     )),
               ],

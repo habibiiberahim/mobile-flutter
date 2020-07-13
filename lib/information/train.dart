@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/home_appbar.dart';
+import 'package:flutter_app/information/404Page.dart';
 import 'package:flutter_app/information/train_detail.dart';
 import 'package:flutter_app/model/Kereta.dart';
 import 'package:flutter_app/model/Tipe.dart';
@@ -116,12 +117,19 @@ class _InformationPageState extends State<InformationTrainPage> {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailTrain(
-                               item,
-                            )));
+                if (item.keterangan == "Normal") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailTrain(
+                                item,
+                              )));
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MaintenancePage()));
+                }
               },
               trailing: Icon(Icons.keyboard_arrow_right,
                   color: Colors.white, size: 30.0)),

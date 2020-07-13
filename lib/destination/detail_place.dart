@@ -15,7 +15,6 @@ class DetailPlace extends StatelessWidget {
     place = item;
   }
 
-
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -45,15 +44,13 @@ class DetailPlace extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: 1.0),
-         
           decoration: BoxDecoration(color: Colors.white60),
           child: Card(
-            elevation: 10,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(item),
-            )
-          ),
+              elevation: 10,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Text(item),
+              )),
         );
       },
     );
