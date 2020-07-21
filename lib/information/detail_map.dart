@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Information.dart';
 import 'package:flutter_app/service/Api.dart';
@@ -25,12 +27,7 @@ class DetailPageMap extends StatelessWidget {
             children: <Widget>[
               Flexible(
                   flex: 1,
-                  child: Card(
-                    elevation: 0.8,
-                    child: PhotoView(
-                        imageProvider: NetworkImage(
-                            baseUrl + 'images/denah/' + map.gambar)),
-                  )),
+                  child: _buildCarrousel(map.gambar)),
               Flexible(
                   flex: 1,
                   child: Card(
@@ -48,5 +45,29 @@ class DetailPageMap extends StatelessWidget {
             ],
           )),
     );
+  }
+
+   _buildCarrousel(String item) {
+    var images = map.getImages(item);
+
+    return CarouselSlider(
+        items: images.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(color: Colors.white60),
+                child: Card(
+                  elevation: 10,
+                  child: PhotoView(
+                      imageProvider:
+                          NetworkImage(baseUrl + 'images/denah/$i')),
+                ),
+              );
+            },
+          );
+        }).toList(),
+        options: CarouselOptions(height: 350.0));
   }
 }

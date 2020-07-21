@@ -4,6 +4,7 @@ import 'package:flutter_app/destination/map.dart';
 import 'package:flutter_app/model/Place.dart';
 import 'package:flutter_app/service/Api.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constant.dart';
 
 class DetailPlace extends StatelessWidget {
@@ -18,7 +19,21 @@ class DetailPlace extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(title: Text(place.placeName)),
+            appBar: AppBar(
+              title: Text(place.placeName),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.phone,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                      print(place.noTelp);
+                      launch('tel: ' + place.noTelp);
+                  },
+                )
+              ],
+            ),
             floatingActionButton: FloatingActionButton(
                 child: Icon(Icons.place),
                 onPressed: () {

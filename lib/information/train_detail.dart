@@ -73,7 +73,7 @@ class DetailTrain extends StatelessWidget {
                 Flexible(
                     flex: 1,
                     child: ListTile(
-                      title: Text("Nomor jalur"),
+                      title: Text("Jalur"),
                       subtitle: Text(kereta.jalurId),
                     )),
                 Flexible(
@@ -82,7 +82,7 @@ class DetailTrain extends StatelessWidget {
                       margin: EdgeInsets.all(5),
                       padding: EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        title: Text("Jalur"),
+                        title: Text("Letak Kereta"),
                         subtitle: Container(
                           color: Colors.black26,
                           height: 250,
