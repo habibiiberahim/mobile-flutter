@@ -1,0 +1,4 @@
+storePassword=<16650021>
+keyPassword=<16650021>
+keyAlias=key
+storeFile=</Users/habibi/key.jks>
